@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     template: "%s | " + config.SITE_NAME,
   },
   description: config.SITE_DESCRIPTION,
-  keywords: ["dris", "ui", "component", "library"],
+  keywords: ["framed", "digital fingerprinting", "networking"],
   robots: "index, follow",
   metadataBase: new URL(config.SITE_URL),
   openGraph: {

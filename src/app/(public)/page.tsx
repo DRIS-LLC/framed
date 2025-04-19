@@ -1,10 +1,9 @@
 import { Container } from "@/components/container";
-import Home from "./home.mdx";
 
-export default async function HomePage() {
+export default function HomePage() {
   return (
     <Container>
-      <Home />
+      <h1 className="text-5xl text-center font-bold">Home</h1>
     </Container>
   );
 }
