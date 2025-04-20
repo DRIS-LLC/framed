@@ -1,9 +1,22 @@
 {
-  "name": "framed",
+  "name": "walker",
   "compatibility_date": "2025-01-24",
   "compatibility_flags": ["nodejs_compat"],
   "pages_build_output_dir": ".vercel/output/static",
   "observability": {
     "enabled": true
-  }
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "walker-db",
+      "database_id": "7dcc38dc-50ed-4d31-8318-cd02c083b2d6"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "bucket_name": "walker-bucket",
+      "binding": "BUCKET"
+    }
+  ]
 }

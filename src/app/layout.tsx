@@ -2,9 +2,11 @@ import Providers from "@/components/providers";
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 
+import Image from "next/image";
+import Footer from "../components/footer";
+import Header from "../components/header";
 import config from "../constants/config";
 import "./globals.css";
-
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
@@ -58,7 +60,18 @@ export default function RootLayout({
   return (
     <Providers>
       <html lang="en" className={`${inter.variable} ${jetBrainsMono.variable} antialiased`}>
-        <body className="font-inter bg-background text-foreground relative w-full min-h-screen">{children}</body>
+        <body className="font-inter dark bg-background text-foreground relative w-full min-h-screen tracking-tight">
+          <Header />
+          <main className="flex flex-col w-full h-full max-w-xl mx-auto justify-start px-6 md:px-0">{children}</main>
+          <Footer />
+          <Image
+            src="/assets/images/background.png"
+            alt="Background"
+            width={1000}
+            height={1000}
+            className="absolute blur-sm top-12 left-0 w-full h-full z-[-1] opacity-20 object-cover overflow-hidden"
+          />
+        </body>
       </html>
     </Providers>
   );

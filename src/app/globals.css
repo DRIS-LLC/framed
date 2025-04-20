@@ -126,9 +126,9 @@
     @apply bg-background text-foreground;
   }
   ::selection {
-    @apply bg-custom/50;
+    @apply bg-purple-400/50;
   }
   ::-moz-selection {
-    @apply bg-custom/50;
+    @apply bg-purple-400/50;
   }
 }
