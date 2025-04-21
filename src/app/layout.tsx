@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     template: "%s | " + config.SITE_NAME,
   },
   description: config.SITE_DESCRIPTION,
-  keywords: ["framed", "digital fingerprinting", "networking"],
+  keywords: ["walker", "connect", "networking", "alumni", "linkedin", "search", "jobs"],
   robots: "index, follow",
   metadataBase: new URL(config.SITE_URL),
   openGraph: {
@@ -69,7 +69,7 @@ export default function RootLayout({
             alt="Background"
             width={1000}
             height={1000}
-            className="absolute blur-sm top-12 left-0 w-full h-full z-[-1] opacity-20 object-cover overflow-hidden"
+            className="absolute blur-sm top-12 transition-all duration-300 left-0 w-full h-full z-[-1] opacity-20 object-cover overflow-hidden"
           />
         </body>
       </html>

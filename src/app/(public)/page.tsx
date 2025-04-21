@@ -19,18 +19,23 @@ import { z } from "zod";
 const categories = [
   {
     name: "Internship opportunities",
+    query: "Help me find an internship! Anyone hiring or know of good programs in my field?",
   },
   {
     name: "Jobs in my field",
+    query: "Looking for job advice from alums in my industry. Who's got the inside scoop?",
   },
   {
     name: "Coffee chats",
+    query: "Who's up for a quick coffee chat? I'm buying!",
   },
   {
     name: "Events near me",
+    query: "Any cool industry events or meetups happening nearby? Would love to connect!",
   },
   {
     name: "Cool startups",
+    query: "Want to meet founders or early startup employees working on interesting stuff!",
   },
 ] as const;
 
@@ -121,7 +126,7 @@ export default function Home() {
       <Form {...form}>
         <motion.form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col gap-2 relative mt-12"
+          className="flex flex-col gap-2 relative mt-10"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -165,7 +170,13 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.5 + index * 0.1 }}
           >
-            <Button variant="outline" className="text-xs font-medium">
+            <Button
+              variant="outline"
+              className="text-xs font-medium"
+              onClick={() => {
+                setSearchQuery(category.query);
+              }}
+            >
               {category.name}
             </Button>
           </motion.div>

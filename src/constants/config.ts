@@ -6,7 +6,6 @@ const config = {
   DB_NAME: "walker-db",
   BUCKET_NAME: "walker-bucket",
   SITE_URL: "https://walker.com",
-  GITHUB_URL: "https://github.com/DRIS-LLC/walker",
 } as const;
 
 export default config;

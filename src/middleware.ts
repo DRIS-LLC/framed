@@ -2,38 +2,38 @@ import { clerkClient, clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/
 import { NextResponse } from "next/server";
 
 const isProtectedRoute = createRouteMatcher(["/onboarding(.*)", "/search(.*)"]);
-const VALID_SUBDOMAINS = ["vanderbilt", "nyu", "wharton"];
+// const VALID_SUBDOMAINS = ["vanderbilt", "nyu", "wharton"];
 
-function getSubdomain(host: string): string | null {
-  if (host && host.includes(".")) {
-    const candidate = host.split(".")[0];
-    if (candidate && !candidate.includes("localhost")) {
-      return candidate;
-    }
-  }
-  return null;
-}
+// function getSubdomain(host: string): string | null {
+//   if (host && host.includes(".")) {
+//     const candidate = host.split(".")[0];
+//     if (candidate && !candidate.includes("localhost")) {
+//       return candidate;
+//     }
+//   }
+//   return null;
+// }
 
 export default clerkMiddleware(async (auth, req) => {
-  const { nextUrl, headers } = req;
-  const host = headers.get("host");
-  const subdomain = host ? getSubdomain(host) : null;
+  // const { nextUrl, headers } = req;
+  // const host = headers.get("host");
+  // const subdomain = host ? getSubdomain(host) : null;
 
-  if (subdomain) {
-    if (!VALID_SUBDOMAINS.includes(subdomain)) {
-      const mainDomain = host?.replace(`${subdomain}.`, "") || "";
-      return NextResponse.redirect(new URL(`https://${mainDomain}${nextUrl.pathname}${nextUrl.search}`));
-    }
+  // if (subdomain) {
+  //   if (!VALID_SUBDOMAINS.includes(subdomain)) {
+  //     const mainDomain = host?.replace(`${subdomain}.`, "") || "";
+  //     return NextResponse.redirect(new URL(`https://${mainDomain}${nextUrl.pathname}${nextUrl.search}`));
+  //   }
 
-    const response = NextResponse.next();
-    response.cookies.set("currentSchool", subdomain, {
-      path: "/",
-      sameSite: "lax",
-      secure: process.env.NODE_ENV === "production",
-    });
+  //   const response = NextResponse.next();
+  //   response.cookies.set("currentSchool", subdomain, {
+  //     path: "/",
+  //     sameSite: "lax",
+  //     secure: process.env.NODE_ENV === "production",
+  //   });
 
-    req.headers.set("x-subdomain", subdomain);
-  }
+  //   req.headers.set("x-subdomain", subdomain);
+  // }
 
   if (isProtectedRoute(req)) await auth.protect();
 
@@ -43,7 +43,7 @@ export default clerkMiddleware(async (auth, req) => {
     const clerk = await clerkClient();
     const user = await clerk.users.getUser(userId);
 
-    const linkedinUrl = user.unsafeMetadata.linkedinProfileUrl;
+    const linkedinUrl = user.unsafeMetadata.linkedinUrl;
 
     if (!linkedinUrl && !req.url.includes("/onboarding")) {
       return NextResponse.redirect(new URL("/onboarding", req.url));

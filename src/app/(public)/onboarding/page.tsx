@@ -13,7 +13,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 const profileSchema = z.object({
-  linkedinProfileUrl: z
+  linkedinUrl: z
     .string()
     .url("Please enter a valid LinkedIn URL")
     .refine((url) => url.includes("linkedin.com"), {
@@ -27,10 +27,16 @@ export default function OnboardingPage() {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // useEffect(() => {
+  //   if (user?.unsafeMetadata.linkedinUrl) {
+  //     router.push("/");
+  //   }
+  // }, [user, router]);
+
   const form = useForm<z.infer<typeof profileSchema>>({
     resolver: zodResolver(profileSchema),
     defaultValues: {
-      linkedinProfileUrl: "",
+      linkedinUrl: "",
     },
   });
 
@@ -41,11 +47,13 @@ export default function OnboardingPage() {
     try {
       await user.update({
         unsafeMetadata: {
-          linkedinProfileUrl: data.linkedinProfileUrl,
+          linkedinUrl: data.linkedinUrl,
         },
       });
 
-      router.push("/");
+      setTimeout(() => {
+        router.push("/");
+      }, 1500);
     } catch (error) {
       console.error("Error saving profile:", error);
     } finally {
@@ -62,7 +70,7 @@ export default function OnboardingPage() {
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <FormField
               control={form.control}
-              name="linkedinProfileUrl"
+              name="linkedinUrl"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>LinkedIn Profile URL</FormLabel>
@@ -75,7 +83,7 @@ export default function OnboardingPage() {
               )}
             />
             <Button type="submit" variant="lilac" rounded="md" className="w-full" disabled={isSubmitting}>
-              {isSubmitting ? "Saving..." : "Continue"}
+              {isSubmitting ? "Indexing profile..." : "Finish"}
               <ArrowRightIcon className="w-4 h-4" />
             </Button>
           </form>

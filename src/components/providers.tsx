@@ -1,4 +1,5 @@
 import { SearchProvider } from "@/providers/search";
+import SuspenseWrapper from "@/providers/suspense-wrapper";
 import { ClerkProvider } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 
@@ -10,7 +11,9 @@ export default function Providers({ children }: { children: React.ReactNode }) {
         variables: { colorPrimary: "#C27BFF" },
       }}
     >
-      <SearchProvider>{children}</SearchProvider>
+      <SearchProvider>
+        <SuspenseWrapper>{children}</SuspenseWrapper>
+      </SearchProvider>
     </ClerkProvider>
   );
 }

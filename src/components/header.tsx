@@ -24,7 +24,7 @@ export default function Header() {
   };
 
   return (
-    <header className="flex absolute top-0 left-0 w-full py-6 px-0 md:px-8" id="top">
+    <header className="flex absolute top-0 left-0 w-full py-6 px-8" id="top">
       <div className="flex w-full mx-auto max-w-6xl justify-between items-center">
         <Link href="/" className="text-2xl font-semibold flex gap-3 items-center">
           <Image src="/assets/images/icon.svg" alt="Walker Icon" width={36} height={36} />
